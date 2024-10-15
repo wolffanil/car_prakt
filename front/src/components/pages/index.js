@@ -1,0 +1,9 @@
+export { default as Login } from "./Login";
+export { default as Register } from "./Register";
+export { default as MyBooks } from "./MyBooks";
+export { default as Catalog } from "./Catalog";
+export { default as CreateCar } from "./admin/cars/CreateCar";
+export { default as UpdateCar } from "./admin/cars/UpdateCar";
+export { default as Books } from "./admin/Books";
+export { default as Car } from "./Car";
+export { default as Home } from "./Home.jsx";

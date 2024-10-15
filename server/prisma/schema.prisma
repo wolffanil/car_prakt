@@ -1,0 +1,70 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  fio String 
+  phone String
+  email String @unique
+  password String
+
+  driverLicense String @map("driver_license")
+
+  role Role @default(user)
+
+  book Book[]
+
+
+  @@map("users")
+}
+
+model Car {
+    id Int @id @default(autoincrement())
+
+    name String
+    image String
+    description String
+
+    books Book[]
+
+    @@map("cars")
+}
+
+
+model Book {
+  id Int @id @default(autoincrement())
+
+  resorve_date String
+
+  car Car @relation(fields: [carId], references: [id], onDelete: Cascade)
+  carId Int @map("car_id")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int @map("user_id")
+
+  status Status @default(new)
+
+  @@map("books")
+}
+
+enum Status {
+  new
+  confirmed
+  cancel
+}
+
+enum Role {
+  user
+  admin
+}
+
+
