@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthProvider";
 import SecondButton from "./SecondButton";
 
 function Header() {
-  const { isAuth, deleteUser } = useAuth();
+  const { isAuth, deleteUser, user } = useAuth();
   const navigate = useNavigate();
 
   const regirectToLogin = () => navigate("/login");
@@ -24,9 +24,11 @@ function Header() {
           <li className="hover:text-button_main duration-200">
             <Link to="/my-books">Мои заказы</Link>
           </li>
-          <li className="hover:text-button_main duration-200">
-            <Link to="/orders">Заказы</Link>
-          </li>
+          {user?.role === "admin" ? (
+            <li className="hover:text-button_main duration-200">
+              <Link to="/orders">Заказы</Link>
+            </li>
+          ) : null}
         </ul>
         {isAuth ? (
           <SecondButton
